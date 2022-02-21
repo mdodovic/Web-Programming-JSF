@@ -1,0 +1,198 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 22, 2019 at 07:43 PM
+-- Server version: 5.7.21
+-- PHP Version: 7.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `tajanstveni2019`
+--
+DROP DATABASE IF EXISTS `tajanstveni2019`;
+CREATE DATABASE IF NOT EXISTS `tajanstveni2019` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `tajanstveni2019`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artikal`
+--
+
+DROP TABLE IF EXISTS `artikal`;
+CREATE TABLE IF NOT EXISTS `artikal` (
+  `idArt` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `onStock` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `idShop` int(11) NOT NULL,
+  PRIMARY KEY (`idArt`),
+  KEY `idShop` (`idShop`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `artikal`
+--
+
+INSERT INTO `artikal` (`idArt`, `name`, `onStock`, `price`, `idShop`) VALUES
+(1, 'sveД‡a ukrasna', 12, 499.5, 1),
+(2, 'kiЕЎobran', 0, 999.99, 1),
+(3, 'knjiga \"Gledajmo se u oДЌi\"', 3, 799.8, 2),
+(4, 'knjiga \"Gledajmo se u oДЌi\"', 1, 699.8, 7),
+(5, 'Moji izumi - Nikola Tesla', 7, 840, 8),
+(6, 'Moji izumi - Nikola Tesla', 0, 840, 7),
+(7, 'sat plasticni', 3, 1250.75, 4),
+(8, 'sat plasticni', 3, 1286.5, 5),
+(9, 'ETF lego komplet mali', 4, 899.6, 3),
+(10, 'ETF lego komplet veliki', 5, 1389.44, 3),
+(11, 'Zenski privezak', 4, 1999.24, 6),
+(12, 'Muske kopce za kosulju', 4, 2001.22, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `igra_info`
+--
+
+DROP TABLE IF EXISTS `igra_info`;
+CREATE TABLE IF NOT EXISTS `igra_info` (
+  `idGame` int(11) NOT NULL AUTO_INCREMENT,
+  `startDate` date NOT NULL,
+  `actual` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1-yes, 0-no',
+  PRIMARY KEY (`idGame`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `igra_info`
+--
+
+INSERT INTO `igra_info` (`idGame`, `startDate`, `actual`) VALUES
+(1, '2018-12-12', 0),
+(2, '2019-11-11', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `igra_pokloni`
+--
+
+DROP TABLE IF EXISTS `igra_pokloni`;
+CREATE TABLE IF NOT EXISTS `igra_pokloni` (
+  `idGift` int(11) NOT NULL AUTO_INCREMENT,
+  `idcustomer` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `idreceiver` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `selected_gift` int(11) DEFAULT NULL COMMENT 'Moze imati vrednost NULL dok se ne odabere poklon.',
+  `id_game` int(11) NOT NULL,
+  PRIMARY KEY (`idGift`),
+  KEY `idcustomer` (`idcustomer`),
+  KEY `idreceiver` (`idreceiver`),
+  KEY `selected_gift` (`selected_gift`),
+  KEY `id_game` (`id_game`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `igra_pokloni`
+--
+
+INSERT INTO `igra_pokloni` (`idGift`, `idcustomer`, `idreceiver`, `selected_gift`, `id_game`) VALUES
+(1, 'acko', 'bosko', 12, 1),
+(2, 'bosko', 'jecka', 1, 1),
+(3, 'jecka', 'maja', 2, 1),
+(4, 'maja', 'jocko', 7, 1),
+(5, 'jocko', 'sanja', 6, 1),
+(6, 'sanja', 'acko', 9, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `korisnik`
+--
+
+DROP TABLE IF EXISTS `korisnik`;
+CREATE TABLE IF NOT EXISTS `korisnik` (
+  `username` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `firstname` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `lastname` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `birthday` date NOT NULL,
+  `isAdmin` tinyint(4) NOT NULL,
+  `playCurrentGame` tinyint(4) NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `korisnik`
+--
+
+INSERT INTO `korisnik` (`username`, `password`, `firstname`, `lastname`, `birthday`, `isAdmin`, `playCurrentGame`) VALUES
+('acko', 'sifra1234', 'Adrijan', 'MilenkoviД‡', '1999-12-31', 0, 1),
+('admin', 'admin1234', 'Dekan', 'Administratorski', '1957-05-10', 1, 0),
+('bosko', 'sifra1234', 'BoЕЎko', 'BoЕЎkoviД‡', '1972-08-08', 0, 1),
+('jecka', 'sifra1234', 'Jecka', 'MickiД‡', DATE_SUB(CURRENT_DATE(), INTERVAL 22 YEAR), 0, 1),
+('jocko', 'sifra1234', 'Jovan', 'VladimiroviД‡', '1999-09-09', 0, 0),
+('maja', 'sifra1234', 'Maja', 'MajiД‡', '1993-05-15', 0, 1),
+('sanja', 'sifra1234', 'Sanja', 'SanjiД‡', '1999-10-10', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prodavnica`
+--
+
+DROP TABLE IF EXISTS `prodavnica`;
+CREATE TABLE IF NOT EXISTS `prodavnica` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `shopName` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `prodavnica`
+--
+
+INSERT INTO `prodavnica` (`id`, `shopName`, `address`) VALUES
+(1, 'Vulkan knjizara', 'Beograd, Bulevar kralja Aleksandra 100'),
+(2, 'SKC Delfi', 'Beograd, Resavska 22'),
+(3, 'Lego store', 'Beograd, TC Rajiceva'),
+(4, 'BPM clocks', 'Novi Sad, TC Promenada'),
+(5, 'BPM clocks', 'Beograd, TC Ada Mall'),
+(6, 'Pandora', 'Kragujevac, TC PlaЕѕa'),
+(7, 'Delfi - MiloЕЎ Crnjanski', 'Beograd, Vase ДЊarapiД‡a 2'),
+(8, 'Delfi - Branislav NuЕЎiД‡', 'Beograd, Makedonska 12');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `artikal`
+--
+ALTER TABLE `artikal`
+  ADD CONSTRAINT `fk_shop_idShop` FOREIGN KEY (`idShop`) REFERENCES `prodavnica` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `igra_pokloni`
+--
+ALTER TABLE `igra_pokloni`
+  ADD CONSTRAINT `igra_pokloni_ibfk_1` FOREIGN KEY (`idcustomer`) REFERENCES `korisnik` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `igra_pokloni_ibfk_2` FOREIGN KEY (`idreceiver`) REFERENCES `korisnik` (`username`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `igra_pokloni_ibfk_3` FOREIGN KEY (`selected_gift`) REFERENCES `artikal` (`idArt`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `igra_pokloni_ibfk_4` FOREIGN KEY (`id_game`) REFERENCES `igra_info` (`idGame`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
