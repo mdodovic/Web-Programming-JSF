@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Novogodisnji praznici</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                Naziv artikla: <h:inputText value="#{presentManageBean.articleName}"></h:inputText>
+                Naziv prodavnice: 
+                <h:selectOneMenu value="#{presentManageBean.selectedShop}"> 
+                    <f:selectItem itemLabel="Sve prodavnice" itemValue="#{-1}" noSelectionOption="true"></f:selectItem>
+                    <f:selectItems value="#{presentManageBean.allShopNames}"></f:selectItems>
+                </h:selectOneMenu>
+                <h:commandButton value="Pretrazi" action="#{presentManageBean.search()}"></h:commandButton>
+            </h:panelGrid>
+        </h:form>
+            
+
+        <h:form rendered="#{not empty presentManageBean.requestedPresents}">
+            <h:dataTable value="#{presentManageBean.requestedPresents}" var="p">
+                <h:column>
+                    <f:facet name="header">
+                        Naziv
+                    </f:facet>
+                    <h:outputText value="#{p.name}" style="color: #{p.amount == 0 ? 'red' : 'black'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Cena
+                    </f:facet>
+                    <h:outputText value="#{p.price}" style="color: #{p.amount == 0 ? 'red' : 'black'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="POKLONI" action="#{presentManageBean.buyGiftForTeacher(p)}" rendered="#{p.amount != 0}"></h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
+

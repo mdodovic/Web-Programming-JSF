@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Novogodisnji praznici</title>
+    </h:head>
+    <h:body>
+        Dobrodosli nastavnice #{teacherManagedBean.u.firstName} #{teacherManagedBean.u.firstName}
+        <br/>
+        
+        <h:outputText value="Srecan ti rodjendan!" rendered="#{loginManagedBean.hisBirthday}"></h:outputText>
+        
+        <h:form>
+            Da li ucestvujete u igri:
+            <br/>
+            <h:selectBooleanCheckbox value="#{teacherManagedBean.playCurrentGame}"></h:selectBooleanCheckbox>
+            <br/>
+            <h:commandButton value="Potvrdi izbor ucesca" action="#{teacherManagedBean.submitParticipation()}"></h:commandButton>
+        </h:form>
+        <br/>
+        <hr/>
+        
+        <h:form rendered="#{teacherManagedBean.IPlayThisGame}">
+            <h:panelGrid columns="4">
+                Kupi poklon: 
+                <h:outputText value="#{teacherManagedBean.buyGiftTo}"></h:outputText> 
+                <h:commandButton value="Kupi" action="#{teacherManagedBean.buyPresent()}"></h:commandButton>     
+                <h:outputText value=""></h:outputText>
+                Sveti Nikola daruje:
+                <h:outputText rendered="#{teacherManagedBean.IGotPresent}" value="#{teacherManagedBean.giftIGot}"></h:outputText>
+                <h:outputText rendered="#{teacherManagedBean.IGotPresent}" value="#{teacherManagedBean.shopName}"></h:outputText>
+                <h:outputText rendered="#{teacherManagedBean.IGotPresent}" value="#{teacherManagedBean.shopAddress}"></h:outputText>
+            </h:panelGrid>
+        </h:form>
+        
+        <br/>
+        <hr/>            
+        <h:form>
+            <h:commandButton value="Izloguj se" action="#{loginManagedBean.logout()}"></h:commandButton>
+        </h:form>
+
+    </h:body>
+</html>
+

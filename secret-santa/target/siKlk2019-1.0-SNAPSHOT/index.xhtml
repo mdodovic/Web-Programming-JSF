@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Novogodisnji praznici</title>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
+    <h:body>
+        <h3>Logovanje</h3>
+        
+        <h:form>
+            <h:panelGrid columns="3">
+                Korisnicko ime: <h:inputText id="username" value="#{loginManagedBean.username}" required="true" requiredMessage="Korisnicko ime je obavezno uneti"></h:inputText>
+                <h:message for="username" errorClass="error"></h:message>
+                Lozinka: <h:inputSecret id="password" value="#{loginManagedBean.password}" required="true" requiredMessage="Lozinka je obavezna"></h:inputSecret>
+                <h:message for="password" errorClass="error"></h:message>
+                Status:
+                <h:selectOneRadio id="status" value="#{loginManagedBean.status}" required="true" requiredMessage="Obavezno oznaciti koja je kategorija">
+                    <f:selectItem itemLabel="Administrator" itemValue="A"></f:selectItem>
+                        <f:selectItem itemLabel="Nastavnik" itemValue="T"></f:selectItem>
+                </h:selectOneRadio>
+                <h:message for="status" errorClass="error"></h:message>
+                <h:commandButton value="Uloguj se" action="#{loginManagedBean.login()}"></h:commandButton>
+                <h:outputText styleClass="error" value="#{loginManagedBean.errorMessage}"></h:outputText>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+    
+</html>
+
