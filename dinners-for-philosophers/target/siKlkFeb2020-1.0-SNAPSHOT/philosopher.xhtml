@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        Dobrodosao filozofe: #{philosopherManagedBean.u.firstName} #{philosopherManagedBean.u.lastName}
+        <h1>Aktivni dogadjaji</h1>
+        <h:form>
+            <h:dataTable value="#{philosopherManagedBean.allActiveEvents}" var="p">
+                <h:column>
+                    <f:facet name="header">
+                        Aktivni dogadjaji
+                    </f:facet>
+                    <h:commandLink value="#{p.name}" action="#{philosopherManagedBean.eventChoose(p)}"></h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <h1>Neaktivni dogadjaji</h1>
+        <h:form>
+            <h:dataTable value="#{philosopherManagedBean.allInActiveEvents}" var="p">
+                <h:column>
+                    <f:facet name="header">
+                        Izglasani dogadjaji
+                    </f:facet>
+                    <h:commandLink value="#{p.name}"></h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Opcija
+                    </f:facet>
+                    #{philosopherManagedBean.getMostVotedOption(p)}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        
+        <h:form>
+            <h:commandButton value="Odjavi se" action="#{loginManagedBean.logout()}"></h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

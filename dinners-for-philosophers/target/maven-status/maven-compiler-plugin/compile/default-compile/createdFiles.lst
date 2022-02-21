@@ -1,0 +1,9 @@
+util\SessionUtils.class
+com\mycompany\siklkfeb2020\JAXRSConfiguration.class
+managedBeans\LoginManagedBean.class
+entities\Votes.class
+util\dao\UsersDao.class
+entities\Users.class
+util\DB.class
+entities\Events.class
+com\mycompany\siklkfeb2020\resources\JavaEE8Resource.class
