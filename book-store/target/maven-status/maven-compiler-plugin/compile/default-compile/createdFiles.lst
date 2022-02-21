@@ -1,0 +1,14 @@
+managedBean\BookManagedBean.class
+util\SessionUtils.class
+util\dao\UserDao.class
+com\mycompany\siklkjanuar2020\resources\JavaEE8Resource.class
+entities\Book.class
+com\mycompany\siklkjanuar2020\JAXRSConfiguration.class
+managedBean\WorkerManagedBean.class
+util\dao\BooksDao.class
+util\DB.class
+entities\Order.class
+util\dao\OrderDao.class
+entities\User.class
+managedBean\LoginManagedBean.class
+managedBean\BuyBookManagedBean.class

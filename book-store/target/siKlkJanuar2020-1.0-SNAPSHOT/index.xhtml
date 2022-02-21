@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Knjizara</title>
+        <h:outputStylesheet library="css" name="default.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h1>Dobrodosli</h1>
+        <h:form>
+            <h:commandLink value="Uloguj se" action="login" rendered="#{not bookManagedBean.hasUser}"></h:commandLink>
+            <h:commandLink value="Izloguj se" action="#{loginManagedBean.logout()}" rendered="#{bookManagedBean.hasUser}"></h:commandLink>
+        </h:form>
+        <h3>Izaberi knjigu</h3>
+        <h:form>
+            <h:panelGrid columns="2">
+                Naziv :<h:inputText value="#{bookManagedBean.bookName}"></h:inputText>
+                Autor :<h:inputText value="#{bookManagedBean.authorName}"></h:inputText>
+                <h:commandButton value="Pretrazi" action="#{bookManagedBean.filterBooks()}"></h:commandButton>
+            </h:panelGrid>
+        </h:form>
+        <h:form>
+            <h:commandButton value="Sortiraj po godini" action="#{bookManagedBean.sortBooksByYear()}"></h:commandButton>
+        </h:form>
+        <h:form>
+            <h:dataTable value="#{bookManagedBean.allBooks}" var="b">
+                <h:column>
+                    <f:facet name="header">
+                        Korice
+                    </f:facet>
+                    <h:graphicImage class="images" value = "/images/#{b.image}"/> 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Naslov
+                    </f:facet>
+                    #{b.naslov}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Autor
+                    </f:facet>
+                    #{b.author}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Broj strana
+                    </f:facet>
+                    #{b.numPages}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Godina izdanja
+                    </f:facet>
+                    #{b.year}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Kupi
+                    </f:facet>
+                    <h:commandButton value="Kupi" action="#{bookManagedBean.buyBook(b)}"></h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <h:outputText value="#{bookManagedBean.errorMessage}" style="color: red"></h:outputText>
+        </h:form>
+    </h:body>
+</html>
+

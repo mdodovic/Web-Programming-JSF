@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Knjizara</title>
+        <h:outputStylesheet library="css" name="default.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="3">
+                Korisnicko ime: <h:inputText id="un" value="#{loginManagedBean.username}" required="true" requiredMessage="Morate uneti korisnicko ime"></h:inputText>
+                <h:message for="un" errorClass="error"></h:message>
+                Lozinka: <h:inputText id="pass" value="#{loginManagedBean.password}" required="true" requiredMessage="Morate uneti lozinku"></h:inputText>
+                <h:message for="pass" errorClass="error"></h:message>
+                Radnik: <h:selectBooleanCheckbox value="#{loginManagedBean.worker}"></h:selectBooleanCheckbox>
+            </h:panelGrid>
+            <h:commandButton value="potvrdi" action="#{loginManagedBean.login()}"></h:commandButton>
+            <h:outputText value="#{loginManagedBean.message}" class="error"></h:outputText>
+        </h:form>
+    </h:body>
+</html>
+
