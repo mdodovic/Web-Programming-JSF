@@ -1,0 +1,14 @@
+util\SessionUtils.class
+util\dao\UserDao.class
+util\dao\UserDaoInterface.class
+com\mycompany\silab2020\JAXRSConfiguration.class
+managed_beans\SearchManagedBean.class
+managed_beans\LoginManagedBean.class
+util\dao\ManifestationDaoInterface.class
+com\mycompany\silab2020\resources\JavaEE8Resource.class
+util\DB.class
+managed_beans\OrganizatorManagedBean.class
+util\dao\ManifestationDao.class
+entities\User.class
+entities\Manifestations.class
+managed_beans\AdminManagedBean.class

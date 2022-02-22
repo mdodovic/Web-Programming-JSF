@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Manifestacije</title>
+        <h:outputStylesheet library="css" name="error.css"/>
+    </h:head>
+    <h:body>
+        <h3>Unos korisnika</h3>
+        <h:form>
+            <fieldset style="width: 700px">
+                <legend>Prijavite se</legend>
+                Username: 
+                <h:inputText value="#{loginManagedBean.username}" 
+                             id="username" 
+                             required="true" 
+                             requiredMessage="Morate uneti korisnicko ime!"></h:inputText>
+                <h:message for="username" errorClass="error"></h:message>
+                <br/>
+                Password: 
+                <h:inputSecret value="#{loginManagedBean.password}"
+                               id="password" 
+                               required="true" requiredMessage="Moreate uneti lozinku!"
+                               validatorMessage="Morate uneti lozinku u ispravnom formatu!"
+                               >
+                    <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\.,@#$%!]).{6,20})"/>
+                </h:inputSecret>
+                <h:message for="password" errorClass="error"></h:message>
+                <br/>
+                <h:commandButton value="Prijava" action="#{loginManagedBean.login()}"></h:commandButton>
+                <br/>
+                <h:outputText styleClass="error" value="#{loginManagedBean.error ? loginManagedBean.errorMessage : ''}"></h:outputText>
+            </fieldset>
+        </h:form>
+        <hr/>
+        <h2>Neprijavljeni korisnici mogu da traze manifestacije:</h2>
+        <h:form>
+            Naziv manifestacije: 
+            <h:inputText value="#{searchManagedBean.name}"></h:inputText>
+            <br/>
+            Inrerval dogadjaja: <br/>
+            Od: <h:inputText value="#{searchManagedBean.dateFrom}" converterMessage="Datum pocetka manifestacie je u pogresnom formatu">
+                <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+            </h:inputText>
+            <br/>
+            Do: <h:inputText value="#{searchManagedBean.dateTo}" converterMessage="Datum kraja manifestacie je u pogresnom formatu">
+                <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+            </h:inputText>
+            <br/>
+            <h:commandButton value="Pretraga" action="#{searchManagedBean.fetchManifestations()}"></h:commandButton>
+            
+            
+        
+            <h:dataTable value="#{searchManagedBean.allMatchedManifestations}" var="m" rendered="#{not empty searchManagedBean.allMatchedManifestations}">     
+                <h:column>
+                    <f:facet name="header">
+                        Ime manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.name}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Datum pocetka manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.dateFrom}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Daum kraja manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.dateTo}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Tip manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.type}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                                    
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Status
+                    </f:facet>
+                    <h:outputText value="#{m.status}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Organizator
+                    </f:facet>
+                    <h:outputText value="#{m.organizer}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                </h:column>            
+            </h:dataTable>
+            <h:outputText value="#{searchManagedBean.errorMessage}" class="error"></h:outputText>
+        </h:form>
+    </h:body>
+</html>
+

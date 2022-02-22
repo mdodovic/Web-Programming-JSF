@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Organizator Manifestacije</title>
+    </h:head>
+    <h:body>
+        <h3>Dobrodosli organizatore: #{loginManagedBean.username} </h3>
+        <h:form>
+            <h:dataTable value="#{manifestationManagedBean.allManifestations}" var="m">
+
+    <!--            <h:column>
+                    <f:facet name="header">
+                        ID
+                    </f:facet>
+                    #{m.id}
+
+                    </h:column>
+    -->
+                <h:column>
+                    <f:facet name="header">
+                        Ime manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.name}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                                    
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Datum pocetka manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.dateFrom}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Daum kraja manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.dateTo}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Tip manifestacije
+                    </f:facet>
+                    <h:outputText value="#{m.type}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                                    
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Status
+                    </f:facet>
+                    <h:outputText value="#{m.status}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Organizator
+                    </f:facet>
+                    <h:outputText value="#{m.organizer}" 
+                                  style="color:#{m.status == 'nova' ? 'blue':'black'}; 
+                                  background-color: #{m.status == 'odbijena' ? 'lightgrey':'white'}"></h:outputText>                </h:column>            
+                <h:column>
+                    <f:facet name="header">
+                        Otkazi manifestaciju
+                    </f:facet>
+                    <h:commandButton value="Otkazi manifestaciju" 
+                        action="#{manifestationManagedBean.cancelManifestation(m)}"
+                        rendered="#{m.status == 'nova' or m.status == 'odobrena'}"
+                        ></h:commandButton>
+                </h:column>
+            </h:dataTable>
+        </h:form>        
+
+        <br/>
+        <hr></hr>
+        <h3>Kao organizator, mozete uneti nove manifestacije</h3>
+        <h:form>
+            <h:panelGrid columns="2">
+                Naziv: <h:inputText value="#{manifestationManagedBean.manifestationName}" 
+                       required="true" requiredMessage="Naziv manifestacije je obavezno uneti!">
+                        </h:inputText>
+                Pocetak: <h:inputText value="#{manifestationManagedBean.dateFrom}"
+                        required="true" requiredMessage="Datum pocetka manifestacije je obavezno uneti!">
+                        <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                        </h:inputText>
+                Kraj: <h:inputText value="#{manifestationManagedBean.dateTo}"
+                        required="true" requiredMessage="Datum pocetka manifestacije je obavezno uneti!">
+                        <f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+                        </h:inputText>
+                Tip manifestacije: 
+                <h:selectOneMenu value="#{manifestationManagedBean.type}"                       
+                                 required="true" 
+                                 requiredMessage="Tip manifestacije je obavezno uneti!">
+                    <f:selectItem itemLabel="koncert" itemValue="koncert"></f:selectItem>
+                    <f:selectItem itemLabel="izlozba" itemValue="izlozba"></f:selectItem>
+                    <f:selectItem itemLabel="festival" itemValue="festival"></f:selectItem>
+                    <f:selectItem itemLabel="sport" itemValue="sport"></f:selectItem>
+                </h:selectOneMenu>
+                <h:commandButton value="Unesi novu manifestaciju" action="#{manifestationManagedBean.addNewManifestation()}"></h:commandButton>
+            </h:panelGrid>
+        </h:form>
+        <br/>
+        
+        <hr></hr>
+        
+        <h:form>
+            <h:commandButton value="Odjavi se" action="#{loginManagedBean.logout()}"></h:commandButton>
+        </h:form>
+        
+    </h:body>
+</html>
+
