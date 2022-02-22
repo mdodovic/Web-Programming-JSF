@@ -1,0 +1,16 @@
+entities\Pacijent.class
+util\SessionUtils.class
+util\dao\UserDao.class
+entities\Lekar.class
+entities\Korisnik.class
+managedBeans\ClosedPatient.class
+managedBeans\LoginManagedBean.class
+entities\Bolnica.class
+com\mycompany\rtiklkavg2020\resources\JavaEE8Resource.class
+managedBeans\TestManagedBean.class
+managedBeans\HospitalizePatient.class
+managedBeans\DoctorManagedBean.class
+util\DB.class
+com\mycompany\rtiklkavg2020\JAXRSConfiguration.class
+util\dao\HospitalDao.class
+managedBeans\PatientManagedBean.class

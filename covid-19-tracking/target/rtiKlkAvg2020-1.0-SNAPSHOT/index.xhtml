@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>Dobrodosli</h1>
+            <h:panelGrid columns="2">
+                Korisnicko ime: <h:inputText value="#{loginManagedBean.username}" required="true" requiredMessage="Morate uneti korisnicko ime"></h:inputText>
+                Lozinka: <h:inputText value="#{loginManagedBean.password}" required="true" requiredMessage="Morate uneti lozinku"></h:inputText>
+                <h:selectOneRadio value="#{loginManagedBean.type}" required="true" requiredMessage="Morate izabrati opciju">
+                    <f:selectItem itemLabel="Lekar" itemValue="Doctor"></f:selectItem>
+                    <f:selectItem itemLabel="Pacijent" itemValue="Patient"></f:selectItem>
+                </h:selectOneRadio>
+            </h:panelGrid>
+            <h:commandButton value="Login" action="#{loginManagedBean.login()}"></h:commandButton>
+            <h:messages style="color: red"/>
+            <h:outputText style="color: red" value="#{loginManagedBean.message}"></h:outputText>
+        </h:form>
+        <h:outputText value="#{loginManagedBean.logoutMessage}" rendered="#{not empty loginManagedBean.logoutMessage}"></h:outputText>
+        <h:form>
+            <h:dataTable value="#{loginManagedBean.stat}" var="s">
+                <h:column>
+                    #{s.numberTested}
+                </h:column>
+                <h:column>
+                    #{s.numberPositiveOnTest}
+                </h:column>
+                <h:column>
+                    #{s.numberNewHospitalized}
+                </h:column>
+                <h:column>
+                    #{s.numberNewDeath}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+
+    </h:body>
+</html>
+
