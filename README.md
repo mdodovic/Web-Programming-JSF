@@ -13,4 +13,10 @@ JSF application for organizing the secret Santa game.
 JSF application for different manifestations management.
 
 ## covid-19-tracking 
-JSF application for tracking covid-positive patients as well as those vaccinated
+JSF application for tracking covid-positive patients as well as those vaccinated.
+
+## bakery-management
+JSF application for bakey management.
+
+## laboratory-scheduling
+JSF application for schedule laboratory usages.
