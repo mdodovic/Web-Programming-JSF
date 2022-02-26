@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Rezervacija sala</title>
+        <h:outputStylesheet library="css" name="positive.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid columns="2">
+                Naziv: <h:inputText value="#{teacherManagedBean.name}" required="true" requiredMessage="Morate uneti naziv rezervacije"></h:inputText>
+                Pocetak: <h:inputText value="#{teacherManagedBean.begin}" required="true" requiredMessage="Morate uneti datum i vreme pocetka rezervacije" converterMessage="Morate uneti datum i vreme u ispravnom formatu">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Belgrade"></f:convertDateTime>
+                </h:inputText>
+                Kraj: <h:inputText value="#{teacherManagedBean.end}" required="true" requiredMessage="Morate uneti datum i vreme kraja rezervacije" converterMessage="Morate uneti datum i vreme u ispravnom formatu">
+                    <f:convertDateTime pattern="dd.MM.yyyy HH:mm" timeZone="Europe/Belgrade"></f:convertDateTime>
+                </h:inputText>
+                Sala: <h:selectManyListbox value="#{teacherManagedBean.chosenHalls}" required="true" requiredMessage="Morate izabrati bar jednu salu">
+                    <f:selectItem itemValue="P25"></f:selectItem>
+                    <f:selectItem itemValue="P26"></f:selectItem>
+                    <f:selectItem itemValue="P70"></f:selectItem>
+                </h:selectManyListbox>
+                <h:commandButton value="Rezervisi salu" action="#{teacherManagedBean.reserve()}"></h:commandButton>
+            </h:panelGrid>
+            <h:outputText styleClass="positive" value="#{teacherManagedBean.message}"></h:outputText>
+        </h:form>
+        
+        <h:form>
+            <h:commandButton value="izloguj se" action="#{loginManagedBean.logout()}"></h:commandButton>
+        </h:form>
+    </h:body>
+    
+    
+</html>
+

@@ -1,0 +1,7 @@
+util\SessionUtils.class
+util\dao\UserDao.class
+com\mycompany\rtilab2021\resources\JavaEE8Resource.class
+com\mycompany\rtilab2021\JAXRSConfiguration.class
+managed_beans\addUserManagedBean.class
+util\DB.class
+entities\User.class
