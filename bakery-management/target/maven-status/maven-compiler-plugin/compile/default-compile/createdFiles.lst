@@ -1,0 +1,10 @@
+util\dao\WaitingQueueDao.class
+util\SessionUtils.class
+com\mycompany\rtiklkjul2020\resources\JavaEE8Resource.class
+util\dao\UserDao.class
+com\mycompany\rtiklkjul2020\JAXRSConfiguration.class
+util\DB.class
+entities\WaitingQueue.class
+entities\User.class
+manage_beans\CustomerManageBean.class
+manage_beans\LoginManageBean.class
